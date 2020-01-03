@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyServer", "IOCPServer\MyServer.csproj", "{119D500C-48AA-4C40-8189-0783653F8086}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCliect", "IOCPClient\MyCliect.csproj", "{1EA7CDFC-C506-4598-8E32-C256437D7DA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyClient", "IOCPClient\MyClient.csproj", "{1EA7CDFC-C506-4598-8E32-C256437D7DA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
