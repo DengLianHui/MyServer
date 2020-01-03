@@ -8,8 +8,8 @@
     <ProjectGuid>{119D500C-48AA-4C40-8189-0783653F8086}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AsyncSocketServer</RootNamespace>
-    <AssemblyName>SocketAsyncSvr</AssemblyName>
+    <RootNamespace>IOCPServer</RootNamespace>
+    <AssemblyName>IOCPServer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
