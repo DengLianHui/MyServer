@@ -58,6 +58,7 @@ namespace MyServer
             listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             listenSocket.Bind(localEndPoint);
             listenSocket.Listen(m_numConnections);
+            Console.WriteLine("OK");
             Program.Logger.InfoFormat("Start listen socket {0} success", localEndPoint.ToString());
 
             StartAccept(null);

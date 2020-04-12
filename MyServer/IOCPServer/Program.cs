@@ -27,7 +27,7 @@ namespace MyServer
             log4net.GlobalContext.Properties["LogFileName"] = "_SocketAsyncServer" + currentTime.ToString("yyyyMMdd");
             Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             Logger.Debug("START");
-            FileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Files");
+            FileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Files");//
 
             if (!Directory.Exists(FileDirectory)) Directory.CreateDirectory(FileDirectory);
 
@@ -39,9 +39,11 @@ namespace MyServer
             m_asyncSocketSvr.SocketTimeOutMS = socketTimeOutMS;
             m_asyncSocketSvr.Init();
             IPEndPoint listenPoint = new IPEndPoint(IPAddress.Parse("192.168.31.120"), port);
+
             m_asyncSocketSvr.Start(listenPoint);
 
             Console.WriteLine("Press any key to terminate the server process....");
+
 
             bool isAlive = true;
 
@@ -54,7 +56,7 @@ namespace MyServer
                         break;
 
                     case "send":
-                        Send();
+                        Send("");
                         break;
 
                     default:
@@ -63,17 +65,50 @@ namespace MyServer
             }
         }
 
-        protected static void Send()
+        protected static bool Send(string fileName)
         {
-            AsyncSocketUserToken[] asyncSocketUserToken=new AsyncSocketUserToken[1];
+            AsyncSocketUserToken[] asyncSocketUserToken = new AsyncSocketUserToken[1];
 
             m_asyncSocketSvr.AsyncSocketUserTokenList.CopyList(ref asyncSocketUserToken);
 
-            asyncSocketUserToken[0].SendBuffer.ClearPacket(); 
-            asyncSocketUserToken[0].SendBuffer.DynamicBufferManager.WriteString("123");
-            asyncSocketUserToken[0].SendBuffer.StartPacket();
-            asyncSocketUserToken[0].SendBuffer.DynamicBufferManager.WriteString("qwe");
-            asyncSocketUserToken[0].SendBuffer.EndPacket();
+
+
+            //FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
+            try
+            {
+                try
+                {
+                    DownloadSocketProtocol download = new DownloadSocketProtocol(m_asyncSocketSvr, asyncSocketUserToken[0]);
+
+                    download.DoLogin();
+
+
+
+                    //long fileSize = 0;
+                    //if (!uploadSocket.DoUpload("", Path.GetFileName(fileName), ref fileSize))
+                    //    throw new Exception(uploadSocket.ErrorString);
+                    //fileStream.Position = fileSize;
+                    //byte[] readBuffer = new byte[PacketSize];
+                    //while (fileStream.Position < fileStream.Length)
+                    //{
+                    //    int count = fileStream.Read(readBuffer, 0, PacketSize);
+                    //    if (!uploadSocket.DoData(readBuffer, 0, count))
+                    //        throw new Exception(uploadSocket.ErrorString);
+                    //}
+                    //if (!uploadSocket.DoEof(fileStream.Length))
+                    //    throw new Exception(uploadSocket.ErrorString);
+                    return true;
+                }
+                catch (Exception E)
+                {
+                    Console.WriteLine("Upload File Error: " + E.Message);
+                    return false;
+                }
+            }
+            finally
+            {
+                //fileStream.Close();
+            }
         }
     }
 }
