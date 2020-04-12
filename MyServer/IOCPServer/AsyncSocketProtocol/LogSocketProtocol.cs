@@ -19,9 +19,9 @@ namespace MyServer
         {
             m_socketFlag = "LogOutput";
             m_logFixedBuffer = new LogFixedBuffer();
-            lock (Program.AsyncSocketSvr.LogOutputSocketProtocolMgr)
+            lock (Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr)
             {
-                Program.AsyncSocketSvr.LogOutputSocketProtocolMgr.Add(this);
+                Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.Add(this);
             }
 
             SendResponse();
@@ -29,9 +29,9 @@ namespace MyServer
 
         public override void Close()
         {
-            lock (Program.AsyncSocketSvr.LogOutputSocketProtocolMgr)
+            lock (Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr)
             {
-                Program.AsyncSocketSvr.LogOutputSocketProtocolMgr.Remove(this);
+                Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.Remove(this);
             }
         }
 
@@ -160,12 +160,12 @@ namespace MyServer
         {
             string strLoggingMessage = RenderLoggingEvent(loggingEvent);
             byte[] tmpBuffer = Encoding.Default.GetBytes(strLoggingMessage);
-            lock (Program.AsyncSocketSvr.LogOutputSocketProtocolMgr)
+            lock (Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr)
             {
-                for (int i = 0; i < Program.AsyncSocketSvr.LogOutputSocketProtocolMgr.Count(); i++)
+                for (int i = 0; i < Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.Count(); i++)
                 {
-                    Program.AsyncSocketSvr.LogOutputSocketProtocolMgr.ElementAt(i).LogFixedBuffer.WriteBuffer(tmpBuffer);
-                    Program.AsyncSocketSvr.LogOutputSocketProtocolMgr.ElementAt(i).InitiativeSend();
+                    Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.ElementAt(i).LogFixedBuffer.WriteBuffer(tmpBuffer);
+                    Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.ElementAt(i).InitiativeSend();
                 }
             }
         }

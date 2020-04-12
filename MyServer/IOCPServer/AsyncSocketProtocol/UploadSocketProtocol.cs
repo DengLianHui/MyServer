@@ -11,6 +11,7 @@ namespace MyServer
     {
         private string m_fileName;
         public string FileName { get { return m_fileName; } }
+
         private FileStream m_fileStream;
 
         public UploadSocketProtocol(AsyncSocketServer asyncSocketServer, AsyncSocketUserToken asyncSocketUserToken)
@@ -315,9 +316,8 @@ namespace MyServer
             return DoSendResult();
         }
 
-        //检测文件是否正在使用中，如果正在使用中则检测是否被上传协议占用，如果占用则关闭,真表示正在使用中，并没有关闭
         public bool CheckFileInUse(string fileName)
-        {
+        {        //检测文件是否正在使用中，如果正在使用中则检测是否被上传协议占用，如果占用则关闭,真表示正在使用中，并没有关闭
             if (BasicFunc.IsFileInUse(fileName))
             {
                 bool result = true;

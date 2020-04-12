@@ -73,7 +73,8 @@ namespace MyClient.SyncSocketCore
             m_sendBuffer.WriteInt(bufferUTF8.Length, false); //写入命令大小
             m_sendBuffer.WriteBuffer(bufferUTF8); //写入命令内容
             m_sendBuffer.WriteBuffer(buffer, offset, count); //写入二进制数据
-            m_tcpClient.Client.Send(m_sendBuffer.Buffer, 0, m_sendBuffer.DataCount, SocketFlags.None);
+           
+            Console.WriteLine(m_tcpClient.Client.Send(m_sendBuffer.Buffer, 0, m_sendBuffer.DataCount, SocketFlags.None));
         }
 
         public bool RecvCommand()

@@ -7,6 +7,7 @@ using MyClient.SyncSocketProtocolCore;
 using MyClient.SyncSocketProtocol;
 using System.IO;
 using System.Threading;
+using System.ComponentModel;
 
 namespace MyClient
 {
@@ -17,23 +18,51 @@ namespace MyClient
         static void Main(string[] args)
         {
             ClientUploadSocket uploadSocket = new ClientUploadSocket();
-            uploadSocket.Connect("127.0.0.1", 9999);
+            uploadSocket.Connect("192.168.31.120", 8888);//129.28.131.104
             Console.WriteLine("Connect Server Success");
             uploadSocket.DoActive();
             uploadSocket.DoLogin("admin", "admin");
             Console.WriteLine("Login Server Success");
             Console.WriteLine("Please Input Upload FileName");
-            string fileName = Console.ReadLine();
-            //string fileName = Path.Combine(Directory.GetCurrentDirectory(), "UploadTest.exe");
-            for (int i = 0; i < 3; i++) //发送失败后，尝试3次重发
+            //string fileName = "G:\\LargeGame\\AimxyV111877.exe";// Console.ReadLine();
+
+            //for (int i = 0; i < 3; i++) //发送失败后，尝试3次重发
+            //{
+            //    if (SendFile(fileName, uploadSocket))
+            //    {
+            //        Console.WriteLine("Upload File Success");
+            //        break;
+            //    }
+            //    Thread.Sleep(10 * 1000); //发送失败等待10S后重连
+            //}
+
+            byte[] buffer = new byte[4096];
+
+            int value = 0;
+
+            for (int i = 0; i < buffer.Length; i++)
             {
-                if (SendFile(fileName, uploadSocket))
+                buffer[i] = byte.Parse(value.ToString());
+                value++;
+                if (value > 255) value = 0;
+            }
+
+            
+            Console.WriteLine("start send buffer");
+
+            while (true)
+            {
+                if (Console.ReadLine()=="A")
                 {
-                    Console.WriteLine("Upload File Success");
+                    uploadSocket.DoData(buffer, 0, buffer.Length);
+                    Console.WriteLine("success");
+                }
+                else
+                {
                     break;
                 }
-                Thread.Sleep(10 * 1000); //发送失败等待10S后重连
             }
+
             Console.ReadKey();
         }
 

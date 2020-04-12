@@ -88,5 +88,23 @@ namespace MyClient.SyncSocketProtocol
                 return false;
             }
         }
+
+        public bool DoPressureTest(byte[] buffer,int offset,int count)
+        {
+            try
+            {
+                m_outgoingDataAssembler.Clear();
+                m_outgoingDataAssembler.AddRequest();
+                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.PressureTest);
+                SendCommand(buffer, offset, count);
+                return true;
+            }
+            catch (Exception E)
+            {
+                //记录日志
+                m_errorString = E.Message;
+                return false;
+            }
+        }
     }
 }

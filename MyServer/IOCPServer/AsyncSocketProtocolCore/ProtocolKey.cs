@@ -75,6 +75,8 @@ namespace MyServer
         public static string Download = "Download";
         public static string SendFile = "SendFile";
         public static string CyclePacket = "CyclePacket";
+
+        public static string PressureTest = "PressureTest";
     }
 
     public class ProtocolCode

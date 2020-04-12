@@ -165,6 +165,10 @@ namespace MyServer
             }
         }
 
+        /// <summary>
+        /// 流程接收开始
+        /// </summary>
+        /// <param name="receiveEventArgs"></param>
         private void ProcessReceive(SocketAsyncEventArgs receiveEventArgs)
         {
             AsyncSocketUserToken userToken = receiveEventArgs.UserToken as AsyncSocketUserToken;
