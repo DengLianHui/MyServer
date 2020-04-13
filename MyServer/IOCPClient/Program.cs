@@ -15,15 +15,17 @@ namespace MyClient
     {
         public static int PacketSize = 32 * 1024;
 
+        static ClientUploadSocket uploadSocket;
+
         static void Main(string[] args)
         {
-            ClientUploadSocket uploadSocket = new ClientUploadSocket();
+            uploadSocket = new ClientUploadSocket();
             uploadSocket.Connect("192.168.31.120", 8888);//129.28.131.104
             Console.WriteLine("Connect Server Success");
             uploadSocket.DoActive();
             uploadSocket.DoLogin("admin", "admin");
             Console.WriteLine("Login Server Success");
-            Console.WriteLine("Please Input Upload FileName");
+
             //string fileName = "G:\\LargeGame\\AimxyV111877.exe";// Console.ReadLine();
 
             //for (int i = 0; i < 3; i++) //发送失败后，尝试3次重发
@@ -66,7 +68,7 @@ namespace MyClient
             Console.ReadKey();
         }
 
-        protected static bool SendFile(string fileName, ClientUploadSocket uploadSocket)
+        protected static bool SendFile(string fileName)
         {
             FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
             try

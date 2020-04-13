@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.AccessControl;
 using System.Net;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using log4net;
-using System.Configuration;
 using System.IO;
-using System.Net.Sockets;
-
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace MyServer
 {
@@ -22,13 +13,9 @@ namespace MyServer
 
         static void Main(string[] args)
         {
-            DateTime currentTime = DateTime.Now;
-            log4net.GlobalContext.Properties["LogDir"] = currentTime.ToString("yyyyMM");
-            log4net.GlobalContext.Properties["LogFileName"] = "_SocketAsyncServer" + currentTime.ToString("yyyyMMdd");
-            Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-            Logger.Debug("START");
-            FileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Files");//
+            InitLog4();
 
+            FileDirectory = Directory.GetCurrentDirectory() + "\\Files";
             if (!Directory.Exists(FileDirectory)) Directory.CreateDirectory(FileDirectory);
 
             int port = 8888;
@@ -41,12 +28,10 @@ namespace MyServer
             IPEndPoint listenPoint = new IPEndPoint(IPAddress.Parse("192.168.31.120"), port);
 
             m_asyncSocketSvr.Start(listenPoint);
-
             Console.WriteLine("Press any key to terminate the server process....");
 
 
             bool isAlive = true;
-
             while (isAlive)
             {
                 switch (Console.ReadLine())
@@ -80,23 +65,6 @@ namespace MyServer
                 {
                     DownloadSocketProtocol download = new DownloadSocketProtocol(m_asyncSocketSvr, asyncSocketUserToken[0]);
 
-                    download.DoLogin();
-
-
-
-                    //long fileSize = 0;
-                    //if (!uploadSocket.DoUpload("", Path.GetFileName(fileName), ref fileSize))
-                    //    throw new Exception(uploadSocket.ErrorString);
-                    //fileStream.Position = fileSize;
-                    //byte[] readBuffer = new byte[PacketSize];
-                    //while (fileStream.Position < fileStream.Length)
-                    //{
-                    //    int count = fileStream.Read(readBuffer, 0, PacketSize);
-                    //    if (!uploadSocket.DoData(readBuffer, 0, count))
-                    //        throw new Exception(uploadSocket.ErrorString);
-                    //}
-                    //if (!uploadSocket.DoEof(fileStream.Length))
-                    //    throw new Exception(uploadSocket.ErrorString);
                     return true;
                 }
                 catch (Exception E)
@@ -109,6 +77,19 @@ namespace MyServer
             {
                 //fileStream.Close();
             }
+        }
+
+        private static void InitLog4()
+        {
+            DateTime currentTime = DateTime.Now;
+            log4net.GlobalContext.Properties["LogDir"] = currentTime.ToString("yyyyMM");
+            log4net.GlobalContext.Properties["LogFileName"] = "_SocketAsyncServer" + currentTime.ToString("yyyyMMdd");
+
+            var path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "log4net.config";
+            var fi = new FileInfo(path);
+            log4net.Config.XmlConfigurator.Configure(fi);
+            Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            Logger.Debug("Log4net init success");
         }
     }
 }

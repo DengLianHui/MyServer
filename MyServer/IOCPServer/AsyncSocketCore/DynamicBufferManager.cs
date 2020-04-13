@@ -43,7 +43,7 @@ namespace MyServer
                 {
                     Buffer[i] = Buffer[count + i];
                 }
-                DataCount = DataCount - count;
+                DataCount -= count;
             }
         }
 
@@ -62,8 +62,9 @@ namespace MyServer
             if (GetReserveCount() >= count) //缓冲区空间够，不需要申请
             {
                 Array.Copy(buffer, offset, Buffer, DataCount, count);
-                DataCount = DataCount + count;
+                DataCount += count;
             }
+
             else //缓冲区空间不够，需要申请更大的内存，并进行移位
             {
                 int totalSize = Buffer.Length + count - GetReserveCount(); //总大小-空余大小

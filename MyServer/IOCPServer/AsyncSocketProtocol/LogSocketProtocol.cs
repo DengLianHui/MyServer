@@ -23,7 +23,7 @@ namespace MyServer
             {
                 Program.m_asyncSocketSvr.LogOutputSocketProtocolMgr.Add(this);
             }
-
+            
             SendResponse();
         }
 

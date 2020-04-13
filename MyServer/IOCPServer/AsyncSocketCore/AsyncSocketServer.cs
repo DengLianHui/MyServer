@@ -12,7 +12,7 @@ namespace MyServer
         private DaemonThread m_daemonThread;
         private Socket listenSocket;
         private int m_numConnections; //最大支持连接个数
-        private int m_receiveBufferSize; //每个连接接收缓存大小
+        private int m_receiveBufferSize; //每个连接接收缓存大小             
         private int m_socketTimeOutMS; //Socket最大超时时间，单位为MS
         private AsyncSocketUserTokenPool m_asyncSocketUserTokenPool;
         private AsyncSocketUserTokenList m_asyncSocketUserTokenList;
@@ -58,7 +58,6 @@ namespace MyServer
             listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             listenSocket.Bind(localEndPoint);
             listenSocket.Listen(m_numConnections);
-            Console.WriteLine("OK");
             Program.Logger.InfoFormat("Start listen socket {0} success", localEndPoint.ToString());
 
             StartAccept(null);
@@ -82,6 +81,19 @@ namespace MyServer
             if (!willRaiseEvent)
             {
                 ProcessAccept(acceptEventArgs);
+            }
+        }
+
+        private void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs acceptEventArgs)
+        {
+            try
+            {
+                ProcessAccept(acceptEventArgs);
+            }
+            catch (Exception E)
+            {
+                Program.Logger.ErrorFormat("Accept client {0} error, message: {1}", acceptEventArgs.AcceptSocket, E.Message);
+                Program.Logger.Error(E.StackTrace);
             }
         }
 
@@ -113,19 +125,6 @@ namespace MyServer
             }
 
             StartAccept(acceptEventArgs); //把当前异步事件释放，等待下次连接
-        }
-
-        private void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs acceptEventArgs)
-        {
-            try
-            {
-                ProcessAccept(acceptEventArgs);
-            }
-            catch (Exception E)
-            {
-                Program.Logger.ErrorFormat("Accept client {0} error, message: {1}", acceptEventArgs.AcceptSocket, E.Message);
-                Program.Logger.Error(E.StackTrace);  
-            }            
         }
 
         private void IO_Completed(object sender, SocketAsyncEventArgs asyncEventArgs)
