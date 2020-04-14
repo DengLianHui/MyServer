@@ -52,57 +52,45 @@ namespace MyServer
                 m_outgoingDataAssembler.AddFailure(ProtocolCode.UserHasLogined, "");
                 return DoSendResult();
             }
-            if (command == UploadSocketCommand.Login)
-                return DoLogin();
-            else if (command == UploadSocketCommand.Active)
-                return DoActive();
-            else if (command == UploadSocketCommand.Dir)
-                return DoDir();
-            else if (command == UploadSocketCommand.CreateDir)
-                return DoCreateDir();
-            else if (command == UploadSocketCommand.DeleteDir)
-                return DoDeleteDir();
-            else if (command == UploadSocketCommand.FileList)
-                return DoFileList();
-            else if (command == UploadSocketCommand.DeleteFile)
-                return DoDeleteFile();
-            else if (command == UploadSocketCommand.Upload)
-                return DoUpload();
-            else if (command == UploadSocketCommand.Data)
-                return DoData(buffer, offset, count);
-            else if (command == UploadSocketCommand.Eof)
-                return DoEof();
-            else
+            switch (command)
             {
-                Program.Logger.Error("Unknow command: " + m_incomingDataParser.Command);
-                return false;
+                case UploadSocketCommand.Login: return DoLogin();
+                case UploadSocketCommand.Active: return DoActive();
+                case UploadSocketCommand.Dir: return DoDir();
+                case UploadSocketCommand.CreateDir: return DoCreateDir();
+                case UploadSocketCommand.DeleteDir: return DoDeleteDir();
+                case UploadSocketCommand.FileList: return DoFileList();
+                case UploadSocketCommand.DeleteFile: return DoDeleteFile();
+                case UploadSocketCommand.Upload: return DoUpload();
+                case UploadSocketCommand.Data: return DoData(buffer, offset, count);
+                case UploadSocketCommand.Eof: return DoEof();
+                default:
+                    Program.Logger.Error("Unknow command: " + command);
+                    return false;
             }
         }
 
         public UploadSocketCommand StrToCommand(string command)
         {
-            if (command.Equals(ProtocolKey.Active, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Active;
-            else if (command.Equals(ProtocolKey.Login, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Login;
-            else if (command.Equals(ProtocolKey.Dir, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Dir;
-            else if (command.Equals(ProtocolKey.CreateDir, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.CreateDir;
-            else if (command.Equals(ProtocolKey.DeleteDir, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.DeleteDir;
-            else if (command.Equals(ProtocolKey.FileList, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.FileList;
-            else if (command.Equals(ProtocolKey.DeleteFile, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.DeleteFile;
-            else if (command.Equals(ProtocolKey.Upload, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Upload;
-            else if (command.Equals(ProtocolKey.Data, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Data;
-            else if (command.Equals(ProtocolKey.Eof, StringComparison.CurrentCultureIgnoreCase))
-                return UploadSocketCommand.Eof;
+            if (Equals(ProtocolKey.Active, command)) return UploadSocketCommand.Active;
+            if (Equals(ProtocolKey.Login, command)) return UploadSocketCommand.Login;
+            if (Equals(ProtocolKey.Dir, command)) return UploadSocketCommand.Dir;
+            if (Equals(ProtocolKey.CreateDir, command)) return UploadSocketCommand.CreateDir;
+            if (Equals(ProtocolKey.DeleteDir, command)) return UploadSocketCommand.DeleteDir;
+            if (Equals(ProtocolKey.FileList, command)) return UploadSocketCommand.FileList;
+            if (Equals(ProtocolKey.DeleteFile, command)) return UploadSocketCommand.DeleteFile;
+            if (Equals(ProtocolKey.Upload, command)) return UploadSocketCommand.Upload;
+            if (Equals(ProtocolKey.Data, command)) return UploadSocketCommand.Data;
+            if (Equals(ProtocolKey.Eof, command)) return UploadSocketCommand.Eof;
+            return UploadSocketCommand.None;
+        }
+
+        public bool Equals(string key, string command)
+        {
+            if (key.Equals(command, StringComparison.CurrentCultureIgnoreCase))
+                return true;
             else
-                return UploadSocketCommand.None;
+                return false;
         }
 
         public bool CheckLogined(UploadSocketCommand command)
@@ -151,7 +139,7 @@ namespace MyServer
                 if (parentDir == "")
                     parentDir = Program.FileDirectory;
                 else
-                    parentDir = Path.Combine(Program.FileDirectory, parentDir);                
+                    parentDir = Path.Combine(Program.FileDirectory, parentDir);
                 if (Directory.Exists(parentDir))
                 {
                     try

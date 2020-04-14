@@ -57,37 +57,36 @@ namespace MyServer
                 m_outgoingDataAssembler.AddFailure(ProtocolCode.UserHasLogined, "");
                 return DoSendResult();
             }
-            if (command == DownloadSocketCommand.Login)
-                return DoLogin();
-            else if (command == DownloadSocketCommand.Active)
-                return DoActive();
-            else if (command == DownloadSocketCommand.Dir)
-                return DoDir();
-            else if (command == DownloadSocketCommand.FileList)
-                return DoFileList();
-            else if (command == DownloadSocketCommand.Download)
-                return DoDownload();
-            else
+            switch (command)
             {
-                Program.Logger.Error("Unknow command: " + m_incomingDataParser.Command);
-                return false;
+                case DownloadSocketCommand.Login: return DoLogin();
+                case DownloadSocketCommand.Active: return DoActive();
+                case DownloadSocketCommand.Dir: return DoDir();
+                case DownloadSocketCommand.FileList: return DoFileList();
+                case DownloadSocketCommand.Download: return DoDownload();
+                default:
+                    Program.Logger.Error("Unknow command: " + m_incomingDataParser.Command);
+                    return false;
             }
         }
 
         public DownloadSocketCommand StrToCommand(string command)
         {
-            if (command.Equals(ProtocolKey.Active, StringComparison.CurrentCultureIgnoreCase))
-                return DownloadSocketCommand.Active;
-            else if (command.Equals(ProtocolKey.Login, StringComparison.CurrentCultureIgnoreCase))
-                return DownloadSocketCommand.Login;
-            else if (command.Equals(ProtocolKey.Dir, StringComparison.CurrentCultureIgnoreCase))
-                return DownloadSocketCommand.Dir;
-            else if (command.Equals(ProtocolKey.FileList, StringComparison.CurrentCultureIgnoreCase))
-                return DownloadSocketCommand.FileList;
-            else if (command.Equals(ProtocolKey.Download, StringComparison.CurrentCultureIgnoreCase))
-                return DownloadSocketCommand.Download;
+            if (Equals(ProtocolKey.Active, command)) return DownloadSocketCommand.Active;
+            if (Equals(ProtocolKey.Login, command)) return DownloadSocketCommand.Login;
+            if (Equals(ProtocolKey.Dir, command)) return DownloadSocketCommand.Dir;
+            if (Equals(ProtocolKey.FileList, command)) return DownloadSocketCommand.FileList;
+            if (Equals(ProtocolKey.Download, command)) return DownloadSocketCommand.Download;
+
+            return DownloadSocketCommand.None;
+        }
+
+        public bool Equals(string key, string command)
+        {
+            if (key.Equals(command, StringComparison.CurrentCultureIgnoreCase))
+                return true;
             else
-                return DownloadSocketCommand.None;
+                return false;
         }
 
         public bool CheckLogined(DownloadSocketCommand command)
@@ -273,7 +272,7 @@ namespace MyServer
                         result = true;
                     }
                 }
-            }            
+            }
             return result;
         }
     }
