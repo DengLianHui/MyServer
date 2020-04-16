@@ -91,6 +91,7 @@
     <Compile Include="AsyncSocketProtocol\ControlSocketProtocol.cs" />
     <Compile Include="AsyncSocketProtocol\DownloadSocketProtocol.cs" />
     <Compile Include="AsyncSocketProtocolCore\BaseSocketProtocol.cs" />
+    <Compile Include="AsyncSocketProtocol\SqlSocketProtocol.cs" />
     <Compile Include="AsyncSocketProtocol\ThroughputSocketProtocol.cs" />
     <Compile Include="AsyncSocketPublic\BasicFunc.cs" />
     <Compile Include="AsyncSocketCore\DaemonThread.cs" />

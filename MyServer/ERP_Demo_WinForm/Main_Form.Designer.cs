@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
             this.OK_Button = new System.Windows.Forms.Button();
             this.Preview_TextBox = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // OK_Button
@@ -50,16 +52,28 @@
             this.Preview_TextBox.Size = new System.Drawing.Size(100, 21);
             this.Preview_TextBox.TabIndex = 1;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(1479, 546);
+            this.dataGridView1.TabIndex = 2;
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1503, 685);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.Preview_TextBox);
             this.Controls.Add(this.OK_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main_Form";
             this.Text = "ERP";
+            this.Load += new System.EventHandler(this.Main_Form_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -69,6 +83,7 @@
 
         private System.Windows.Forms.Button OK_Button;
         private System.Windows.Forms.TextBox Preview_TextBox;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

@@ -22,8 +22,7 @@ namespace MyServer
         public override void Close()
         {
             base.Close();
-            if (m_fileStream != null)
-                m_fileStream.Close();
+            if (m_fileStream != null) m_fileStream.Close();
             m_fileStream = null;
         }
 
@@ -33,30 +32,21 @@ namespace MyServer
             m_outgoingDataAssembler.Clear();
             m_outgoingDataAssembler.AddResponse();
             m_outgoingDataAssembler.AddCommand(m_incomingDataParser.Command);
-            if (command == RemoteStreamSocketCommand.FileExists)
-                return DoFileExists();
-            else if (command == RemoteStreamSocketCommand.OpenFile)
-                return DoOpenFile();
-            else if (command == RemoteStreamSocketCommand.SetSize)
-                return DoSetSize();
-            else if (command == RemoteStreamSocketCommand.GetSize)
-                return DoGetSize();
-            else if (command == RemoteStreamSocketCommand.SetPosition)
-                return DoSetPosition();
-            else if (command == RemoteStreamSocketCommand.GetPosition)
-                return DoGetPosition();
-            else if (command == RemoteStreamSocketCommand.Read)
-                return DoRead();
-            else if (command == RemoteStreamSocketCommand.Write)
-                return DoWrite(buffer, offset, count);
-            else if (command == RemoteStreamSocketCommand.Seek)
-                return DoSeek();
-            else if (command == RemoteStreamSocketCommand.CloseFile)
-                return DoCloseFile();
-            else
+
+            switch (command)
             {
-                Program.Logger.Error("Unknow command: " + m_incomingDataParser.Command);
-                return false;
+                case RemoteStreamSocketCommand.FileExists:return DoFileExists();
+                case RemoteStreamSocketCommand.OpenFile: return DoOpenFile();
+                case RemoteStreamSocketCommand.SetSize:return DoSetSize();
+                case RemoteStreamSocketCommand.GetSize: return DoGetSize();
+                case RemoteStreamSocketCommand.SetPosition:return DoSetPosition();
+                case RemoteStreamSocketCommand.GetPosition:return DoGetPosition();
+                case RemoteStreamSocketCommand.Read:return DoRead();
+                case RemoteStreamSocketCommand.Write:return DoWrite(buffer, offset, count);
+                case RemoteStreamSocketCommand.Seek:return DoSeek();
+                case RemoteStreamSocketCommand.CloseFile:return DoCloseFile();
+                default:Program.Logger.Error("Unknow command: " + m_incomingDataParser.Command);
+                    return false;
             }
         }
 

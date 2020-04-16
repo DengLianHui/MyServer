@@ -20,7 +20,7 @@ namespace MyServer
         private UploadSocketProtocolMgr m_uploadSocketProtocolManager;
         private DownloadSocketProtocolMgr m_downloadSocketProtocolManager;
 
-        public int SocketTimeOutMS { get { return m_socketTimeOutMS; } set { m_socketTimeOutMS = value; } }         
+        public int SocketTimeOutMS { get { return m_socketTimeOutMS; } set { m_socketTimeOutMS = value; } }
         public AsyncSocketUserTokenList AsyncSocketUserTokenList { get { return m_asyncSocketUserTokenList; } }
         public LogOutputSocketProtocolMgr LogOutputSocketProtocolMgr { get { return m_logOutputSocketProtocolManager; } }
         public UploadSocketProtocolMgr UploadSocketProtocolMgr { get { return m_uploadSocketProtocolManager; } }
@@ -141,13 +141,13 @@ namespace MyServer
                         ProcessSend(asyncEventArgs);
                     else
                         throw new ArgumentException("The last operation completed on the socket was not a receive or send");
-                }   
+                }
             }
             catch (Exception E)
             {
                 Program.Logger.ErrorFormat("IO_Completed {0} error, message: {1}", userToken.ConnectSocket, E.Message);
                 Program.Logger.Error(E.StackTrace);
-            }                     
+            }
         }
 
         private bool ProcessSend(SocketAsyncEventArgs sendEventArgs)
@@ -199,18 +199,14 @@ namespace MyServer
                         { //如果处理数据返回失败，则断开连接
                             CloseClientSocket(userToken);
                         }
-                        else //否则投递下次介绍数据请求
+                        else //否则投递下次收数据请求
                         {
-                            bool willRaiseEvent = userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs); //投递接收请求
-                            if (!willRaiseEvent)
-                                ProcessReceive(userToken.ReceiveEventArgs);
+                            if (!userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs))ProcessReceive(userToken.ReceiveEventArgs);
                         }
                     }
                     else
                     {
-                        bool willRaiseEvent = userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs); //投递接收请求
-                        if (!willRaiseEvent)
-                            ProcessReceive(userToken.ReceiveEventArgs);
+                        if (!userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs)) ProcessReceive(userToken.ReceiveEventArgs);
                     }
                 }
             }
@@ -267,7 +263,7 @@ namespace MyServer
             {
                 userToken.ConnectSocket.Shutdown(SocketShutdown.Both);
             }
-            catch (Exception E) 
+            catch (Exception E)
             {
                 Program.Logger.ErrorFormat("CloseClientSocket Disconnect client {0} error, message: {1}", socketInfo, E.Message);
             }
