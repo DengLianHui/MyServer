@@ -37,7 +37,7 @@
             // 
             // OK_Button
             // 
-            this.OK_Button.Location = new System.Drawing.Point(1227, 613);
+            this.OK_Button.Location = new System.Drawing.Point(1416, 650);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(75, 23);
             this.OK_Button.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // Preview_TextBox
             // 
-            this.Preview_TextBox.Location = new System.Drawing.Point(1202, 586);
+            this.Preview_TextBox.Location = new System.Drawing.Point(1391, 623);
             this.Preview_TextBox.Name = "Preview_TextBox";
             this.Preview_TextBox.Size = new System.Drawing.Size(100, 21);
             this.Preview_TextBox.TabIndex = 1;

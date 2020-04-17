@@ -59,6 +59,7 @@
     <Compile Include="SqlClass_Folder\SqlHelper.cs" />
     <Compile Include="SqlClass_Folder\Sql_MySql.cs" />
     <Compile Include="SqlClass_Folder\Sql_SqlServer.cs" />
+    <Compile Include="Tool_Folder\ChangeHelper.cs" />
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
