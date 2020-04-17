@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-using MyServer;
+using Module.SocketServer;
 
-namespace MyClient.SyncSocketCore
+namespace Module.SocketClient.SyncSocketCore
 {
     public class SyncSocketInvokeElement
     {

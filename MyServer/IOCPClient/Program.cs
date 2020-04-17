@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyClient.SyncSocketProtocolCore;
-using MyClient.SyncSocketProtocol;
+using Module.SocketClient.SyncSocketProtocolCore;
+using Module.SocketClient.SyncSocketProtocol;
 using System.IO;
 using System.Threading;
 using System.ComponentModel;
 
-namespace MyClient
+namespace Module.SocketClient
 {
     class Program
     {

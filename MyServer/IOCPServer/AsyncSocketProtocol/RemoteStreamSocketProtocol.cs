@@ -5,7 +5,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.IO;
 
-namespace MyServer
+namespace Module.SocketServer
 {
     public class RemoteStreamSocketProtocol : BaseSocketProtocol
     {

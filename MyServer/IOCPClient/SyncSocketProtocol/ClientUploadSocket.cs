@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyClient.SyncSocketProtocolCore;
+using Module.SocketClient.SyncSocketProtocolCore;
 
-namespace MyClient.SyncSocketProtocol
+namespace Module.SocketClient.SyncSocketProtocol
 {
     class ClientUploadSocket : ClientBaseSocket
     {
         public ClientUploadSocket()
             : base()
         {
-            m_protocolFlag = MyServer.ProtocolFlag.Upload;
+            m_protocolFlag = Module.SocketServer.ProtocolFlag.Upload;
         }
 
         public bool DoUpload(string dirName, string fileName, ref long fileSize)
@@ -24,9 +24,9 @@ namespace MyClient.SyncSocketProtocol
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.Upload);
-                m_outgoingDataAssembler.AddValue(MyServer.ProtocolKey.DirName, dirName);
-                m_outgoingDataAssembler.AddValue(MyServer.ProtocolKey.FileName, fileName);
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.Upload);
+                m_outgoingDataAssembler.AddValue(Module.SocketServer.ProtocolKey.DirName, dirName);
+                m_outgoingDataAssembler.AddValue(Module.SocketServer.ProtocolKey.FileName, fileName);
                 SendCommand();
                 bool bSuccess = RecvCommand();
                 if (bSuccess)
@@ -34,7 +34,7 @@ namespace MyClient.SyncSocketProtocol
                     bSuccess = CheckErrorCode();
                     if (bSuccess)
                     {
-                        bSuccess = m_incomingDataParser.GetValue(MyServer.ProtocolKey.FileSize, ref fileSize);
+                        bSuccess = m_incomingDataParser.GetValue(Module.SocketServer.ProtocolKey.FileSize, ref fileSize);
                     }
                     return bSuccess;
                 }
@@ -55,7 +55,7 @@ namespace MyClient.SyncSocketProtocol
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.Data);
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.Data);
                 SendCommand(buffer, offset, count);
                 return true;
             }
@@ -73,7 +73,7 @@ namespace MyClient.SyncSocketProtocol
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.Eof);
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.Eof);
                 SendCommand();
                 bool bSuccess = RecvCommand();
                 if (bSuccess)
@@ -95,7 +95,7 @@ namespace MyClient.SyncSocketProtocol
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.PressureTest);
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.PressureTest);
                 SendCommand(buffer, offset, count);
                 return true;
             }

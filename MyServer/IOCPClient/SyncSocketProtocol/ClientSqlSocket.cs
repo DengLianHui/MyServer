@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyClient.SyncSocketProtocolCore;
+using Module.SocketClient.SyncSocketProtocolCore;
 
-namespace MyClient.SyncSocketProtocol
+namespace Module.SocketClient.SyncSocketProtocol
 {
     class ClientSqlSocket : ClientBaseSocket
     {
         public ClientSqlSocket() :
             base()
         {
-            m_protocolFlag = MyServer.ProtocolFlag.SQL;
+            m_protocolFlag = Module.SocketServer.ProtocolFlag.SQL;
         }
 
 

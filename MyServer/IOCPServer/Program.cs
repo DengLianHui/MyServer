@@ -3,7 +3,7 @@ using System.Net;
 using log4net;
 using System.IO;
 
-namespace MyServer
+namespace Module.SocketServer
 {
     public class Program
     {

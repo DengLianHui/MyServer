@@ -7,7 +7,7 @@ using System.IO;
 using log4net.Core;
 using System.Windows.Forms;
 
-namespace MyServer
+namespace Module.SocketServer
 {
     public class LogOutputSocketProtocol : BaseSocketProtocol
     {

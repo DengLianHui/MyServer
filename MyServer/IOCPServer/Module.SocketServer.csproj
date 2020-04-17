@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>MyServer.Program</StartupObject>
+    <StartupObject>Module.SocketServer.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>9481DEE7A87FB6F8535C03C5EA5A5FE3F26E9DD2</ManifestCertificateThumbprint>

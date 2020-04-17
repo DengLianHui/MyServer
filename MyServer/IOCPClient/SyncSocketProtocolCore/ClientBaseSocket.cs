@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyClient.SyncSocketCore;
+using Module.SocketClient.SyncSocketCore;
 
-namespace MyClient.SyncSocketProtocolCore
+namespace Module.SocketClient.SyncSocketProtocolCore
 {
     public class ClientBaseSocket : SyncSocketInvokeElement
     {
@@ -22,12 +22,12 @@ namespace MyClient.SyncSocketProtocolCore
         public bool CheckErrorCode()
         {
             int errorCode = 0;
-            m_incomingDataParser.GetValue(MyServer.ProtocolKey.Code, ref errorCode);
-            if (errorCode == MyServer.ProtocolCode.Success)
+            m_incomingDataParser.GetValue(Module.SocketServer.ProtocolKey.Code, ref errorCode);
+            if (errorCode == Module.SocketServer.ProtocolCode.Success)
                 return true;
             else
             {
-                m_errorString = MyServer.ProtocolCode.GetErrorCodeString(errorCode);
+                m_errorString = Module.SocketServer.ProtocolCode.GetErrorCodeString(errorCode);
                 return false;
             }
         }
@@ -38,7 +38,7 @@ namespace MyClient.SyncSocketProtocolCore
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.Active);
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.Active);
                 SendCommand();
                 bool bSuccess = RecvCommand();
                 if (bSuccess)
@@ -60,9 +60,9 @@ namespace MyClient.SyncSocketProtocolCore
             {
                 m_outgoingDataAssembler.Clear();
                 m_outgoingDataAssembler.AddRequest();
-                m_outgoingDataAssembler.AddCommand(MyServer.ProtocolKey.Login);
-                m_outgoingDataAssembler.AddValue(MyServer.ProtocolKey.UserName, userName);
-                m_outgoingDataAssembler.AddValue(MyServer.ProtocolKey.Password, MyServer.BasicFunc.MD5String(password));
+                m_outgoingDataAssembler.AddCommand(Module.SocketServer.ProtocolKey.Login);
+                m_outgoingDataAssembler.AddValue(Module.SocketServer.ProtocolKey.UserName, userName);
+                m_outgoingDataAssembler.AddValue(Module.SocketServer.ProtocolKey.Password, Module.SocketServer.BasicFunc.MD5String(password));
                 SendCommand();
                 bool bSuccess = RecvCommand();
                 if (bSuccess)
