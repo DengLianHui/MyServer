@@ -1,6 +1,6 @@
 ﻿namespace ERP_Demo_Server
 {
-    partial class Form1
+    partial class Main_Form
     {
         /// <summary>
         /// 必需的设计器变量。
