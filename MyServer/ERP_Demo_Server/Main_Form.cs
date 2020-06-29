@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ERP_Demo_Server
 {
-    public partial class Form1 : Form
+    public partial class Main_Form :Module.TemplateForm.Template_Form
     {
-        public Form1()
+        public Main_Form()
         {
             InitializeComponent();
+        }
+
+        private void Main_Form_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

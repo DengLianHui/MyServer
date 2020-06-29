@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IrisSkin4">
-      <HintPath>..\MyDCC\IrisSkin4.dll</HintPath>
+      <HintPath>..\..\..\..\MyEKI\MyEKI\Module.TemplateForm\bin\Debug\IrisSkin4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
