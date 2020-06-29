@@ -20,7 +20,7 @@ namespace Module.SocketClient
         static void Main(string[] args)
         {
             uploadSocket = new ClientUploadSocket();
-            uploadSocket.Connect("192.168.31.120", 8888);//129.28.131.104
+            uploadSocket.Connect("127.0.0.1", 8888);//192.168.31.120
             Console.WriteLine("Connect Server Success");
             uploadSocket.DoActive();
             uploadSocket.DoLogin("admin", "admin");

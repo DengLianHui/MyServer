@@ -14,6 +14,7 @@ namespace Module.SocketServer
         private int m_numConnections; //最大支持连接个数
         private int m_receiveBufferSize; //每个连接接收缓存大小             
         private int m_socketTimeOutMS; //Socket最大超时时间，单位为MS
+        private int m_threadIndex;
         private AsyncSocketUserTokenPool m_asyncSocketUserTokenPool;
         private AsyncSocketUserTokenList m_asyncSocketUserTokenList;
         private LogOutputSocketProtocolMgr m_logOutputSocketProtocolManager;
@@ -129,6 +130,8 @@ namespace Module.SocketServer
 
         private void IO_Completed(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
+            m_threadIndex++;
+            Thread.CurrentThread.Name = "thread_" + asyncEventArgs.LastOperation + m_threadIndex;
             AsyncSocketUserToken userToken = asyncEventArgs.UserToken as AsyncSocketUserToken;
             userToken.ActiveDateTime = DateTime.Now;
             try
@@ -201,7 +204,7 @@ namespace Module.SocketServer
                         }
                         else //否则投递下次收数据请求
                         {
-                            if (!userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs))ProcessReceive(userToken.ReceiveEventArgs);
+                            if (!userToken.ConnectSocket.ReceiveAsync(userToken.ReceiveEventArgs)) ProcessReceive(userToken.ReceiveEventArgs);
                         }
                     }
                     else

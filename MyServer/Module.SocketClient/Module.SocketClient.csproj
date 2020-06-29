@@ -86,19 +86,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\IOCPServer\AsyncSocketCore\DynamicBufferManager.cs">
+    <Compile Include="..\Module.SocketServer\AsyncSocketCore\DynamicBufferManager.cs">
       <Link>SyncSocketCore\DynamicBufferManager.cs</Link>
     </Compile>
-    <Compile Include="..\IOCPServer\AsyncSocketCore\IncomingDataParser.cs">
+    <Compile Include="..\Module.SocketServer\AsyncSocketCore\IncomingDataParser.cs">
       <Link>SyncSocketCore\IncomingDataParser.cs</Link>
     </Compile>
-    <Compile Include="..\IOCPServer\AsyncSocketCore\OutgoingDataAssembler.cs">
+    <Compile Include="..\Module.SocketServer\AsyncSocketCore\OutgoingDataAssembler.cs">
       <Link>SyncSocketCore\OutgoingDataAssembler.cs</Link>
     </Compile>
-    <Compile Include="..\IOCPServer\AsyncSocketProtocolCore\ProtocolKey.cs">
+    <Compile Include="..\Module.SocketServer\AsyncSocketProtocolCore\ProtocolKey.cs">
       <Link>SyncSocketProtocolCore\ProtocolKey.cs</Link>
     </Compile>
-    <Compile Include="..\IOCPServer\AsyncSocketPublic\BasicFunc.cs">
+    <Compile Include="..\Module.SocketServer\AsyncSocketPublic\BasicFunc.cs">
       <Link>BasicFunc.cs</Link>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
