@@ -37,7 +37,8 @@
             // 
             // OK_Button
             // 
-            this.OK_Button.Location = new System.Drawing.Point(1416, 650);
+            this.OK_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OK_Button.Location = new System.Drawing.Point(1137, 554);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(75, 23);
             this.OK_Button.TabIndex = 0;
@@ -47,7 +48,8 @@
             // 
             // Preview_TextBox
             // 
-            this.Preview_TextBox.Location = new System.Drawing.Point(1391, 623);
+            this.Preview_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Preview_TextBox.Location = new System.Drawing.Point(1112, 527);
             this.Preview_TextBox.Name = "Preview_TextBox";
             this.Preview_TextBox.Size = new System.Drawing.Size(100, 21);
             this.Preview_TextBox.TabIndex = 1;
@@ -58,14 +60,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1479, 546);
+            this.dataGridView1.Size = new System.Drawing.Size(1200, 509);
             this.dataGridView1.TabIndex = 2;
             // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1503, 685);
+            this.ClientSize = new System.Drawing.Size(1224, 589);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.Preview_TextBox);
             this.Controls.Add(this.OK_Button);

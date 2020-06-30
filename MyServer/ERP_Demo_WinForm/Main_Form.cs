@@ -23,25 +23,25 @@ namespace ERP_Demo_WinForm
 
         private void OK_Button_Click(object sender, EventArgs e)
         {
-            DbParameter sqlParameter = new SqlParameter("@var1", SqlDbType.VarChar) { Value = "123" };
+            //DbParameter sqlParameter = new SqlParameter("@var1", SqlDbType.VarChar) { Value = "123" };
 
-            Tool_Folder.SQLCommandStruct sc = new Tool_Folder.SQLCommandStruct();
-            sc.DbParameter = sqlParameter;
+            //Tool_Folder.SQLCommandStruct sc = new Tool_Folder.SQLCommandStruct();
+            //sc.DbParameter = sqlParameter;
 
-            byte[] vs = Tool_Folder.ChangeHelper.ObjectToBytes(sc);
+            //byte[] vs = Tool_Folder.ChangeHelper.ObjectToBytes(sc);
 
-            Tool_Folder.SQLCommandStruct sqlParameter1 = (Tool_Folder.SQLCommandStruct)Tool_Folder.ChangeHelper.BytesToObject(vs);
+            //Tool_Folder.SQLCommandStruct sqlParameter1 = (Tool_Folder.SQLCommandStruct)Tool_Folder.ChangeHelper.BytesToObject(vs);
 
 
-            return;
-
-            
+            //return;
 
 
 
-            //dataGridView1.DataSource = sqlHelper.GetDataSet("SELECT * FROM t_user WHERE user_name = @var1", new SqlParameter[]{
-            //      new SqlParameter("@var1",SqlDbType.VarChar){Value="邓联辉"},
-            // }).Tables[0].DefaultView;
+
+
+            dataGridView1.DataSource = sqlHelper.GetDataSet("SELECT * FROM t_user WHERE user_name = @var1", new SqlParameter[]{
+                  new SqlParameter("@var1",SqlDbType.VarChar){Value="邓联辉"},
+             }).Tables[0].DefaultView;
         }
 
         private void Main_Form_Load(object sender, EventArgs e)
