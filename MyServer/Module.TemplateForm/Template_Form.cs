@@ -51,5 +51,10 @@ namespace Module.TemplateForm
                 }
             }
         }
+
+        private void Template_Form_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

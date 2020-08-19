@@ -38,6 +38,7 @@
             this.skinEngine1.DisabledMenuFontColor = System.Drawing.SystemColors.GrayText;
             this.skinEngine1.InactiveCaptionColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.skinEngine1.SerialNumber = "";
+            this.skinEngine1.SkinFile = null;
             // 
             // Template_Form
             // 
@@ -48,6 +49,7 @@
             this.Name = "Template_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Template_Form";
+            this.Load += new System.EventHandler(this.Template_Form_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Template_Form_KeyDown);
             this.ResumeLayout(false);
 

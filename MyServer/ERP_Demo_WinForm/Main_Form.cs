@@ -19,7 +19,7 @@ namespace ERP_Demo_WinForm
             InitializeComponent();
         }
 
-        SqlHelper sqlHelper = new SqlHelper("System.Data.SqlClient", "Server=129.28.131.104;Database=db_eki_cs;User Id=sa; Password=dlh445566^&;");
+        readonly SqlHelper sqlHelper = new SqlHelper("System.Data.SqlClient", "Server=129.28.131.104;Database=db_eki_cs;User Id=sa; Password=dlh445566^&;");
 
         private void OK_Button_Click(object sender, EventArgs e)
         {

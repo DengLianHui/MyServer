@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ERP_Demo_WinForm
 {
@@ -16,7 +17,14 @@ namespace ERP_Demo_WinForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_Form());
+
+            if ((Process.GetProcessesByName(Application.ProductName).Length < 2))
+            {
+                if (new User_Folder.Login_Form().ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new Main_Form());
+                }
+            }
         }
     }
 }
